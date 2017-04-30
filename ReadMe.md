@@ -4,7 +4,7 @@
 
 ![''][license]
 
-This is a set of image optimizing tools/helpers. Nothing fancy or advanced, just to make it easier to use. 2 scripts are to create/convert files, and the other ones to optimize images.
+This is a set of image optimizing tools/helpers. Nothing fancy or advanced, but just to make it easier to use. 2 scripts are to create/convert files, and the other ones to optimize images.
 
 I used a GUI tool before, but decided to move over to using these scripts instead. Much easier and more convinient. You can use them as they are, or perhaps together with other scripts - as helpers.
 
@@ -20,12 +20,14 @@ $ cd /path/to/imageOpt/files
 $ sudo install -bv -m755 -o0 -g0 mk* *opt /usr/local/xbin
 ```
 
+**Dendencies**
+
+You'll need: `jpegoptim`, `optipng` and `gifsicle`, if not already installed. Each scripts will abort if any dependecies are missing.
+
 
 ## Usage
 
 _For more examples and usage, please refer to the [Wiki][wiki]._
-
-Before you use these scripts, you'll need: `jpegoptim`, `optipng` and `gifsicle`, if not already installed. Each scripts will abort if any dependecies are missing.
 
 
 #### mkjpg, mkthumb
