@@ -11,7 +11,7 @@ I used a GUI tool before, but decided to move over to using these scripts instea
 
 ## Install
 
-Install it to `/usr/local/bin`, or in another location. Just make sure it's added to PATH.
+Install the files to /usr/local/bin, or to another location. Just make sure it's added to PATH.
 
 I use `/usr/local/xbin` for these scripts, so...
 
@@ -20,7 +20,7 @@ $ cd /path/to/imageOpt/files
 $ sudo install -bv -m755 -o0 -g0 mk* *opt /usr/local/xbin
 ```
 
-**Dendencies**
+**Dependencies**
 
 You'll need: `jpegoptim`, `optipng` and `gifsicle`, if not already installed. Each scripts will abort if any dependecies are missing.
 
@@ -81,7 +81,7 @@ $ pngopt ./**/*.png
 > ```bash
 > optipng -strip all -quiet -o7 "${file}" -out "${file}.opt";
 > ```
-> 
+>
 > `-o7` is quite a hard setting, it may take some time on larger files.
 
 If the optimized file doesn't get smaller than the original - it'll keep the original instead.
