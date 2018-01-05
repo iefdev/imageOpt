@@ -37,7 +37,7 @@ if [[ `uname` == 'Darwin' ]]; then
     fi
     ERR=$?
 else
-    _msg="$FUNCNAME: Can't find 'magick' or 'convert'. Please install ImageMagick...";
+    _msg="$(basename $0): Can't find 'magick' or 'convert'. Please install ImageMagick...";
     [[ ! `type magick 2> /dev/null` && ! `type convert 2> /dev/null` ]] && echo ${_msg} && return 1;
     # IMv7
     if [[ `type magick 2> /dev/null` ]]; then
