@@ -52,4 +52,9 @@ else
     ERR=$?
 fi
 
+# ...and optimize
+if [[ `type jpgopt 2>/dev/null` || `type pngopt 2>/dev/null` ]]; then
+    echo -e "\n:: Optimizing..." && ${_ext}opt "${1%.*}_${_px}px.${_ext}";
+fi
+
 exit ${ERR};

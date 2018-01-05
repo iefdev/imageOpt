@@ -51,4 +51,7 @@ else
     ERR=$?
 fi
 
+# ...and optimize
+[[ `type jpgopt 2>/dev/null` ]] && echo -e "\n:: Optimizing..." && jpgopt "${1%.*}.jpg";
+
 exit ${ERR};
