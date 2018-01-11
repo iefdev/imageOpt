@@ -107,7 +107,7 @@ $ gifopt -c 256 <file(s)>
 
 ## @todo
 
-- [ ] Invoke `jpgopt`/`pngopt` into `mkthumb`, to save a 2'nd run.
+- [x] Invoke `jpgopt`/`pngopt` into `mkthumb`, to save a 2'nd run.
 
 
 ## Contributing
