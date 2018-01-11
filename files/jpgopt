@@ -5,6 +5,7 @@
 # Description: A script/wrapper to automate 'mkjpg' and
 # 'jpegoptim'. If the input is a png it'll run 'mkjpg'
 # to convert it to a jpg, and then get optimized.
+#
 # Quality defaults to 80%.
 #
 # ------------------------------------------------------------
@@ -19,7 +20,7 @@
 ERR=0;
 
 # Help
-[[ $# < 1 || $1 == '-h' ]] && cat $0 | sed -n '12,16p' && exit 1;
+[[ $# < 1 || $1 == '-h' ]] && cat $0 | sed -n '13,17p' && exit 1;
 
 # Check dependencies
 # ------------------------------------------------------------
