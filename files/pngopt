@@ -51,9 +51,9 @@ function isOptimized()
 
 # Loop $@
 for file in "$@"; do
-	[[ -f "${file}" && "${file##*.}" != 'png' ]] && echo "It's not an png image. Skipping...";
-
-	if [[ -f "${file}" ]]; then
+	if [[ -f "${file}" && "${file##*.}" != 'png' ]]; then
+	    echo -e "»» $(basename "${file}")\n:: Not a PNG image. Skipping...\n";
+	elif [[ -f "${file}" ]]; then
         #echo "»» ${file}";
         echo "»» $(basename "${file}")";
         optipng -strip all -quiet -o7 "${file}" -out "${file}.opt";
