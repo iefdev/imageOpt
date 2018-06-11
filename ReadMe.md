@@ -105,20 +105,15 @@ $ gifopt -c 256 <file(s)>
 > ```
 
 
-## @todo
-
-- [x] Invoke `jpgopt`/`pngopt` into `mkthumb`, to save a 2'nd run.
-
-
 ## Contributing
 
-1. Fork it (<https://github.com/iEFdev/imageOpt/fork>)
+1. Fork it (<https://gitlab.com/iEFdev/imageOpt/forks/new>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
+5. Create a new Merge Request
 
 
 <!-- Markdown link & img dfn's -->
 [license]: https://img.shields.io/badge/License-WTFPL-778899.svg?style=plastic
-[wiki]: https://github.com/iEFdev/imageOpt/wiki
+[wiki]: wikis/
