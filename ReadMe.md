@@ -116,4 +116,4 @@ $ gifopt -c 256 <file(s)>
 
 <!-- Markdown link & img dfn's -->
 [license]: https://img.shields.io/badge/License-WTFPL-778899.svg?style=plastic
-[wiki]: wikis/
+[wiki]: https://gitlab.com/iEFdev/imageOpt/wikis/
