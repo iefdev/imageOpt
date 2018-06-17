@@ -2,11 +2,11 @@
 
 > A few scripts to help convert/optimize images.
 
-![''][license]
+![][license]
 
 This is a set of image optimizing tools/helpers. Nothing fancy or advanced, but just to make it easier to use. 2 scripts are to create/convert files, and the other ones to optimize images.
 
-I used a GUI tool before, but decided to move over to using these scripts instead. Much easier and more convinient. You can use them as they are, or perhaps together with other scripts - as helpers.
+I used a GUI tool before, but decided to move over to using these scripts instead. Much easier and more convinient, and I can use the same set of scripts in both GNU/Linux and macOS. You can use them as they are, or perhaps together with other scripts - as helpers.
 
 
 ## Install
@@ -17,7 +17,7 @@ I use `/usr/local/xbin` for these scripts, so...
 
 ```bash
 $ cd /path/to/imageOpt/files
-$ sudo install -bv -m755 -o0 -g0 mk* *opt /usr/local/xbin
+$ sudo install -v -m755 -o0 -g0 mk* *opt /usr/local/xbin
 ```
 
 **Dependencies**
@@ -35,11 +35,13 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 Both are using ImageMagick (`magick`(IM7) or `convert`(IM6)), and `sips`(macOS) to create the files.
 
 ```bash
-$ mkjpg file.png [<procent>]    # Default is 100 (%)
+$ mkjpg [ % ] file.png      # Default is 100 (%)
+$ mkjpg 60 file.png         # 60%
+$ mkjpg ./{foo,bar}.png     # Multiple images
 
-$ mkthumb file.jpg              # Result: file_250px.jpg
-$ mkthumb file.jpg 400          # Result: file_400px.jpg
-                                # Max-size is 500
+$ mkthumb file.jpg          # Result: file_250px.jpg
+$ mkthumb 400 file.jpg      # Result: file_400px.jpg (max: 500)
+$ mkthumb ./{foo,bar}.png   # Multiple images
 ```
 
 
@@ -50,7 +52,7 @@ $ mkthumb file.jpg 400          # Result: file_400px.jpg
 ```bash
 $ jpgopt /path/to/file.jpg
 $ jpgopt /path/to/{more,files}.jpg
-$ jpgopt [<procent>] files.jpg  # Default is 80 (%)
+$ jpgopt [ % ] files.jpg  # Default is 80 (%)
 ```
 ```bash
 $ cd /some/image/folder
