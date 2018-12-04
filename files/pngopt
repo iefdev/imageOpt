@@ -37,7 +37,7 @@ function isOptimized()
     size1=$(ls -al "${img1}" 2> /dev/null | awk '{ print $5;}');
     size2=$(ls -al "${img2}" 2> /dev/null | awk '{ print $5;}');
 
-    if [ ${size2} -lt ${size1} ]; then
+    if [[ ${size2} -lt ${size1} ]]; then
         procentage=$(echo "scale=2; (${size2} * 100 / ${size1}) - 100" | bc);
         echo -e ":: Optimized! (${procentage//-/}%)\n";
         [[ $V != 0 ]] && echo -en "Renaming: " && vb='-v ';
@@ -56,7 +56,7 @@ for file in "$@"; do
 	elif [[ -f "${file}" ]]; then
         #echo "»» ${file}";
         echo "»» $(basename "${file}")";
-        optipng -strip all -quiet -o7 "${file}" -out "${file}.opt";
+        optipng -strip all -quiet -fix -o7 "${file}" -out "${file}.opt";
         isOptimized "${file}"{,.opt};
 	else
 		echo "$(basename $0): '${file}' doesn't exist";
