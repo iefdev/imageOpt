@@ -20,7 +20,7 @@
 ERR=0;
 
 # Help
-[[ $# < 1 || $1 == '-h' ]] && cat $0 | sed -n '13,17p' && exit 1;
+[[ $# < 1 || ${1} == '-h' ]] && sed -n '13,17p' ${0} && exit 1;
 
 # Check dependencies
 # ------------------------------------------------------------
@@ -33,12 +33,12 @@ done
 # Quality defaults to 80 (40-100)
 _q=80;
 _regexp='^[0-9]+$';
-[[ $1 =~ ${_regexp} && $1 -ge 40 && $1 -le 100 ]] && _q=$1 && shift;
+[[ ${1} =~ ${_regexp} && ${1} -ge 40 && ${1} -le 100 ]] && _q=${1} && shift;
 
 # JpegOptim.
 function jpegopt()
 {
-	local _img="$1";
+	local _img="${1}";
 	jpegoptim -m${_q} -ftPv -s "${_img}";
 }
 
