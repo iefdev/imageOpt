@@ -17,10 +17,10 @@ V=0;
 vb='';
 
 # Help
-[[ $# < 1 || $1 == '-h' ]] && cat $0 | sed -n '10,12p' && exit 1;
+[[ $# < 1 || ${1} == '-h' ]] && sed -n '10,12p' ${0} && exit 1;
 
 # Verbose
-[[ $1 == '-v' ]] && V=1 && shift 1;
+[[ ${1} == '-v' ]] && V=1 && shift 1;
 
 # Check dependencies
 for dep in optipng; do
@@ -31,20 +31,20 @@ done
 # Pick or delete
 function isOptimized()
 {
-	local img1="$1";
-	local img2="$2";
+	local img1="${1}";
+	local img2="${2}";
 
-    size1=$(ls -al "${img1}" 2> /dev/null | awk '{ print $5;}');
-    size2=$(ls -al "${img2}" 2> /dev/null | awk '{ print $5;}');
+    size1=$(wc -c "${img1}" 2> /dev/null | awk '{print $1}');
+    size2=$(wc -c "${img2}" 2> /dev/null | awk '{print $1}');
 
     if [[ ${size2} -lt ${size1} ]]; then
         procentage=$(echo "scale=2; (${size2} * 100 / ${size1}) - 100" | bc);
         echo -e ":: Optimized! (${procentage//-/}%)\n";
-        [[ $V != 0 ]] && echo -en "Renaming: " && vb='-v ';
+        [[ ${V} != 0 ]] && echo -en "Renaming: " && vb='-v ';
         mv ${vb}"${img2}" "${img2%.*}";
     else
         echo -e ":: Keeping the original...\n";
-        [[ $V != 0 ]] && echo -n "Deleting: " && vb='-v ';
+        [[ ${V} != 0 ]] && echo -n "Deleting: " && vb='-v ';
         rm ${vb}"${img2}";
     fi
 }
@@ -54,7 +54,6 @@ for file in "$@"; do
 	if [[ -f "${file}" && "${file##*.}" != 'png' ]]; then
 	    echo -e "»» $(basename "${file}")\n:: Not a PNG image. Skipping...\n";
 	elif [[ -f "${file}" ]]; then
-        #echo "»» ${file}";
         echo "»» $(basename "${file}")";
         optipng -strip all -quiet -fix -o7 "${file}" -out "${file}.opt";
         isOptimized "${file}"{,.opt};
