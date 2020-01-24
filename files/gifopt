@@ -24,7 +24,7 @@ C=''
 [[ ${1} == '-v' ]] && V=1 && shift 1;
 
 # Colors ?
-[[ ${1} == '-c' ]] && C="--colors $2 " && shift 2;
+[[ ${1} == '-c' ]] && C="--colors ${2} " && shift 2;
 
 # Check dependencies
 for dep in gifsicle; do
