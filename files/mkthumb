@@ -2,6 +2,7 @@
 #
 # /usr/local/xbin/mkthumbs
 #
+#
 # Description:
 #   Create thumbnails/miniatures.
 #   Thumb (defaults) to 250px. Max 500px.
@@ -16,44 +17,48 @@
 #   mkthumb -h                  Show help
 #
 
-ERR=0
+ERR=0;
 
 # Help
-[[ $# < 1 || ${1} == '-h' ]] && sed -n '12,16p' ${0} && exit 1;
+[[ ${#} < 1 || ${1} == '-h' ]] && sed -n '13,17p' ${0} && exit 1;
+
 
 # Check size
 [[ ${1} =~ ^[0-9]+$ ]] && _px=${1} && shift 1;
 [[ ${_px} && ${_px} -le 500 ]] || _px=250;
 
+
 # Check dependencies
 if [[ $(uname -s) != 'Darwin' ]]; then
-    _msg="$(basename $0): Can't find 'magick' or 'convert'. Please install ImageMagick...";
-    [[ ! `type magick 2> /dev/null` && ! `type convert 2> /dev/null` ]] && echo ${_msg} && exit 1;
+    _msg="$(basename ${0}): Can't find 'magick' or 'convert'. Please install ImageMagick...";
+    [[ ! $(type magick 2> /dev/null) && ! $(type convert 2> /dev/null) ]] && echo ${_msg} && exit 1;
 fi
 
+
+# Loop @
 for file in "$@"; do
     _file=$(basename "${file}");
     _ext=$(echo "${_file##*.}");
 
     # IMv7
-    if [[ `type magick 2> /dev/null` ]]; then
+    if [[ $(type magick 2> /dev/null) ]]; then
         magick "${file}" -resize ${_px}x${_px} -quality 100 "${file%.*}_${_px}px.${_ext}";
         echo -e "${file}\n  ${file%.*}_${_px}px.${_ext}";
     # IMv6
-    elif [[ `type convert 2> /dev/null` ]]; then
+    elif [[ $(type convert 2> /dev/null) ]]; then
         convert "${file}" -resize ${_px}x${_px} -quality 100 "${file%.*}_${_px}px.${_ext}";
-        echo -e "${file}\n  ${file%.*}_${_px}px$_ext";
+        echo -e "${file}\n  ${file%.*}_${_px}px.${_ext}";
     # sips (macOS)
     elif [[ $(uname -s) == 'Darwin' ]]; then
         sips -Z ${_px} -s formatOptions best "${file}" --out "${file%.*}_${_px}px.${_ext}" 2> /dev/null;
     fi
 
-    ERR=$?
+    ERR=${?};
 
     # ...and optimize
-    if [[ `type jpgopt 2>/dev/null` || `type pngopt 2>/dev/null` ]]; then
+    if [[ $(type jpgopt 2>/dev/null) || $(type pngopt 2>/dev/null) ]]; then
         echo -e "\n:: Optimizing..." && ${_ext}opt "${file%.*}_${_px}px.${_ext}";
-        ERR=$?
+        ERR=${?};
     fi
 done
 

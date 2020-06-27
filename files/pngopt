@@ -2,10 +2,9 @@
 #
 # /usr/local/xbin/pngopt
 #
-# Description: A script to automate 'optipng' to optimize PNG
-# images.
 #
-# ------------------------------------------------------------
+# Description:
+#   A script to automate 'optipng' to optimize PNG images.
 #
 # Usage:
 #	pngopt [-v] <file(s)>       1 or more files
@@ -17,16 +16,19 @@ V=0;
 vb='';
 
 # Help
-[[ $# < 1 || ${1} == '-h' ]] && sed -n '10,12p' ${0} && exit 1;
+[[ ${#} < 1 || ${1} == '-h' ]] && sed -n '9,11p' ${0} && exit 1;
+
 
 # Verbose
 [[ ${1} == '-v' ]] && V=1 && shift 1;
 
+
 # Check dependencies
 for dep in optipng; do
-	[[ ! `type ${dep} 2>/dev/null` ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
+	[[ ! $(type ${dep} 2>/dev/null) ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
 done
 [[ ${ERR} == 1 ]] && echo -e "\nAborting..." && exit ${ERR};
+
 
 # Pick or delete
 function isOptimized()
@@ -49,6 +51,7 @@ function isOptimized()
     fi
 }
 
+
 # Loop $@
 for file in "$@"; do
 	if [[ -f "${file}" && "${file##*.}" != 'png' ]]; then
@@ -58,7 +61,7 @@ for file in "$@"; do
         optipng -strip all -quiet -fix -o7 "${file}" -out "${file}.opt";
         isOptimized "${file}"{,.opt};
 	else
-		echo "$(basename $0): '${file}' doesn't exist";
+		echo "$(basename ${0}): '${file}' doesn't exist";
 		ERR=1;
 	fi
 done

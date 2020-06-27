@@ -2,6 +2,7 @@
 #
 # /usr/local/xbin/mkjpg
 #
+#
 # Description:
 #   Convert image to jpeg.
 #   Quality (defaults) to 100% (range: 40-100).
@@ -11,35 +12,37 @@
 #
 # Usage:
 #   mkjpg [ % ] file.png        Default is 100 (%)
-#   mkjpg 60 file.png           60%
+#   mkjpg 60 file.png           60% quality
 #   mkjpg **/{more,files}.png   Mulltiple images
 #   mkjpg -h                    Show help
 #
 
-ERR=0
+ERR=0;
 
 # Help
-[[ $# < 1 || ${1} == '-h' ]] && sed -n '12,16p' ${0} && exit 1;
+[[ ${#} < 1 || ${1} == '-h' ]] && sed -n '13,17p' ${0} && exit 1;
+
 
 # Check quality
 [[ ${1} =~ ^[0-9]+$ ]] && _q=${1} && shift 1;
 [[ ${_q} && ${_q} -ge 40 && ${_q} -lt 100 ]] || _q=100;
 
+
 # Check dependencies
 if [[ $(uname -s) != 'Darwin' ]]; then
     _msg="$(basename $0): Can't find 'magick' or 'convert'. Please install ImageMagick...";
-    [[ ! `type magick 2> /dev/null` && ! `type convert 2> /dev/null` ]] && echo ${_msg} && exit 1;
+    [[ ! $(type magick 2> /dev/null) && ! $(type convert 2> /dev/null) ]] && echo ${_msg} && exit 1;
 fi
 
-for file in "$@"; do
-    _file=$(basename "${file}");
 
+# Loop @
+for file in "$@"; do
     # IMv7
-    if [[ `type magick 2> /dev/null` ]]; then
+    if [[ $(type magick 2> /dev/null) ]]; then
         magick "${file}" -background white -alpha remove -quality ${_q} "${file%.*}.jpg";
         echo -e "${file}\n  ${file%.*}.jpg";
     # IMv6
-    elif [[ `type convert 2> /dev/null` ]]; then
+    elif [[ $(type convert 2> /dev/null) ]]; then
         convert "${file}" -background white -alpha remove -quality ${_q} "${file%.*}.jpg";
         echo -e "${file}\n  ${file%.*}.jpg";
     # sips (macOS)
@@ -47,8 +50,9 @@ for file in "$@"; do
         sips -s format jpeg -s formatOptions ${_q} "${file}" --out "${file%.*}.jpg" 2> /dev/null;
     fi
 
-    ERR=$?
+    echo;
 
+    ERR=${?};
 done
 
 exit ${ERR};

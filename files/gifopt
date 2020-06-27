@@ -2,10 +2,9 @@
 #
 # /usr/local/xbin/gifopt
 #
-# Description: A script to automate 'gifsicle' to optimize GIF
-# images.
 #
-# ------------------------------------------------------------
+# Description:
+#   A script to automate 'gifsicle' to optimize GIF images.
 #
 # Usage:
 #   gifopt [-v] [-c <int>] <file(s)>        1 or more files
@@ -18,19 +17,23 @@ vb='';
 C=''
 
 # Help
-[[ $# < 1 || ${1} == '-h' ]] && sed -n '10,12p' ${0} && exit 1;
+[[ ${#} < 1 || ${1} == '-h' ]] && sed -n '9,11p' ${0} && exit 1;
+
 
 # Verbose
 [[ ${1} == '-v' ]] && V=1 && shift 1;
 
+
 # Colors ?
 [[ ${1} == '-c' ]] && C="--colors ${2} " && shift 2;
 
+
 # Check dependencies
 for dep in gifsicle; do
-    [[ ! `type ${dep} 2>/dev/null` ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
+    [[ ! $(type ${dep} 2>/dev/null) ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
 done
 [[ ${ERR} == 1 ]] && echo -e "\nAborting..." && exit ${ERR};
+
 
 # Pick or delete
 function isOptimized()
@@ -53,12 +56,12 @@ function isOptimized()
     fi
 }
 
+
 # Loop $@
 for file in "$@"; do
     [[ -f "${file}" && "${file##*.}" != 'gif' ]] && echo "It's not an gif image. Skipping...";
 
     if [[ -f "${file}" ]]; then
-        #echo "»» ${file}";
         echo "»» $(basename "${file}")";
         gifsicle ${C}-O3 "${file}" -o "${file}.opt";
         isOptimized "${file}"{,.opt};
