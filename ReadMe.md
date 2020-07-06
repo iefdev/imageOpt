@@ -31,6 +31,8 @@ You'll need to have these programs installed:
 
 Each scripts will abort if any dependecies are missing.
 
+_Refer to your package manager (pacman, dnf, apt, port, etc), or compile from source._
+
 
 ## Usage
 
