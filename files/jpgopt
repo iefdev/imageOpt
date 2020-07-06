@@ -11,9 +11,9 @@
 #
 # Usage:
 #   jpgopt [ % ] file.jpg       Default is 100 (%)
-#	jpgopt 60 file.jpg          60% quality
-#	jpgopt **/{more,files}.jpg  More files
-#	jpgopt -h                   Show help
+#   jpgopt 60 file.jpg          60% quality
+#   jpgopt **/{more,files}.jpg  More files
+#   jpgopt -h                   Show help
 #
 
 ERR=0;
@@ -24,7 +24,7 @@ ERR=0;
 
 # Check dependencies
 for dep in jpegoptim mkjpg; do
-	[[ ! `type ${dep} 2>/dev/null` ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
+    [[ ! `type ${dep} 2>/dev/null` ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
 done
 [[ ${ERR} == 1 ]] && echo -e "\nAborting..." && exit ${ERR};
 
@@ -38,22 +38,22 @@ _regexp='^[0-9]+$';
 # JpegOptim.
 function jpegopt()
 {
-	local _img="${1}";
-	jpegoptim -m${_q} -ftPv -s "${_img}";
+    local _img="${1}";
+    jpegoptim -m${_q} -ftPv -s "${_img}";
 }
 
 
 # Loop $@
 for file in "$@"; do
-	[[ -f "${file}" && "${file##*.}" != 'jpg' ]] && \
-	    echo ":: Running 'mkjpg'..." && mkjpg "${file}" && echo;
-	if [[ -f ${file} ]]; then
-		jpegopt "${file%.*}.jpg";
-	else
-		echo "'${file}' doesn't exist";
-		ERR=1;
-	fi
-	echo;
+    [[ -f "${file}" && "${file##*.}" != 'jpg' ]] && \
+        echo ":: Running 'mkjpg'..." && mkjpg "${file}";
+    if [[ -f ${file} ]]; then
+        jpegopt "${file%.*}.jpg";
+    else
+        echo "'${file}' doesn't exist";
+        ERR=1;
+    fi
+    echo;
 done
 
 exit ${ERR};

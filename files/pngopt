@@ -7,8 +7,8 @@
 #   A script to automate 'optipng' to optimize PNG images.
 #
 # Usage:
-#	pngopt [-v] <file(s)>       1 or more files
-#	pngopt -h                   Show help
+#   pngopt [-v] <file(s)>       1 or more files
+#   pngopt -h                   Show help
 #
 
 ERR=0;
@@ -25,7 +25,7 @@ vb='';
 
 # Check dependencies
 for dep in optipng; do
-	[[ ! $(type ${dep} 2>/dev/null) ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
+    [[ ! $(type ${dep} 2>/dev/null) ]] && echo -e ":: You must install '${dep}' to continue." && ERR=1;
 done
 [[ ${ERR} == 1 ]] && echo -e "\nAborting..." && exit ${ERR};
 
@@ -33,8 +33,8 @@ done
 # Pick or delete
 function isOptimized()
 {
-	local img1="${1}";
-	local img2="${2}";
+    local img1="${1}";
+    local img2="${2}";
 
     size1=$(wc -c "${img1}" 2> /dev/null | awk '{print $1}');
     size2=$(wc -c "${img2}" 2> /dev/null | awk '{print $1}');
@@ -54,16 +54,16 @@ function isOptimized()
 
 # Loop $@
 for file in "$@"; do
-	if [[ -f "${file}" && "${file##*.}" != 'png' ]]; then
-	    echo -e "»» $(basename "${file}")\n:: Not a PNG image. Skipping...\n";
-	elif [[ -f "${file}" ]]; then
+    if [[ -f "${file}" && "${file##*.}" != 'png' ]]; then
+        echo -e "»» $(basename "${file}")\n:: Not a PNG image. Skipping...\n";
+    elif [[ -f "${file}" ]]; then
         echo "»» $(basename "${file}")";
         optipng -strip all -quiet -fix -o7 "${file}" -out "${file}.opt";
         isOptimized "${file}"{,.opt};
-	else
-		echo "$(basename ${0}): '${file}' doesn't exist";
-		ERR=1;
-	fi
+    else
+        echo "$(basename ${0}): '${file}' doesn't exist";
+        ERR=1;
+    fi
 done
 
 exit ${ERR};
