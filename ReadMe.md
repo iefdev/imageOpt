@@ -129,5 +129,5 @@ gifsicle ${C}-O3 "${file}" -o "${file}.opt";
 
 
 <!-- Markdown link & img dfn's -->
-[license]: https://img.shields.io/badge/License-WTFPL-778899.svg?style=plastic
+[license]: https://img.shields.io/badge/License-0BSD-789.svg?style=plastic "BSD Zero Clause License (SPDX: 0BSD)"
 [wiki]: https://gitlab.com/iEFdev/imageOpt/wikis/
