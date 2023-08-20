@@ -25,12 +25,12 @@ ERR=0;
 
 # Check size
 [[ ${1} =~ ^[0-9]+$ ]] && _px=${1} && shift 1;
-[[ ${_px} && ${_px} -le 500 ]] || _px=250;
+[[ ${_px} && ${_px} -le 512 ]] || _px=256;
 
 
 # Check dependencies
 if [[ $(uname -s) != 'Darwin' ]]; then
-    _msg="$(basename ${0}): Can't find 'magick' or 'convert'. Please install ImageMagick...";
+    _msg="$(basename ${0}): Can't find \`magick' or \`convert'. Please install ImageMagick...";
     [[ ! $(type magick 2> /dev/null) && ! $(type convert 2> /dev/null) ]] && echo ${_msg} && exit 1;
 fi
 
