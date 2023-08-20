@@ -59,7 +59,8 @@ function isOptimized()
 
 # Loop $@
 for file in "$@"; do
-    [[ -f "${file}" && "${file##*.}" != 'gif' ]] && echo "It's not an gif image. Skipping...";
+    [[ -f "${file}" && "${file##*.}" != 'gif' ]] && \
+        echo -e "»» $(basename "${file}")\n:: Not a GIF image. Skipping...\n";
 
     if [[ -f "${file}" ]]; then
         echo "»» $(basename "${file}")";
