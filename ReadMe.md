@@ -65,9 +65,9 @@ $ mkthumb -h
 $ jpgopt -h
 # Usage:
 #   jpgopt [ % ] file.jpg       Default is 100 (%)
-#	jpgopt 60 file.jpg          60% quality
-#	jpgopt **/{more,files}.jpg  More files
-#	jpgopt -h                   Show help
+#   jpgopt 60 file.jpg          60% quality
+#   jpgopt **/{more,files}.jpg  More files
+#   jpgopt -h                   Show help
 ```
 
 The line used by `jpegoptim` looks like this:
@@ -86,8 +86,8 @@ You can also run `jpgopt` on your PNG images, to batch _convert->optimize_ your 
 ```bash
 $ pngopt -h
 # Usage:
-#	pngopt [-v] <file(s)>       1 or more files
-#	pngopt -h                   Show help
+#   pngopt [-v] <file(s)>       1 or more files
+#   pngopt -h                   Show help
 ```
 
 The line used by `optipng` looks like this:
@@ -121,7 +121,7 @@ gifsicle ${C}-O3 "${file}" -o "${file}.opt";
 
 ## Contributing
 
-1. Fork it (<https://gitlab.com/iEFdev/imageOpt/forks/new>)
+1. Fork it (<https://gitlab.com/iefdev/imageOpt/forks/new>)
 2. Create your feature branch (`git switch -c feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
@@ -130,4 +130,4 @@ gifsicle ${C}-O3 "${file}" -o "${file}.opt";
 
 <!-- Markdown link & img dfn's -->
 [license]: https://img.shields.io/badge/License-0BSD-789.svg?style=plastic "BSD Zero Clause License (SPDX: 0BSD)"
-[wiki]: https://gitlab.com/iEFdev/imageOpt/wikis/
+[wiki]: https://gitlab.com/iefdev/imageOpt/wikis/
