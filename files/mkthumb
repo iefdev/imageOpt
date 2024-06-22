@@ -5,7 +5,7 @@
 #
 # Description:
 #   Create thumbnails/miniatures.
-#   Thumb (defaults) to 250px. Max 500px.
+#   Thumb (defaults) to 256px. Max 512px.
 #
 #   Script is using 'magick' or 'convert' (ImageMagick).
 #   On macOS, it also has a fallback on 'sips' (bundled).
